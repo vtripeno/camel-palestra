@@ -10,9 +10,9 @@ public class RestConfigutation extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        restConfiguration().component("servlet")
+        restConfiguration().component("spark-rest")
             // configuracao de contexto, host e porta
-//            .contextPath("/").host("{{host}}").port("{{port}}")
+            .contextPath("/").host("localhost").port("9090")
             // configuracao de binding para efetuar automaticamente bind
             // json para pojo
             .bindingMode(RestBindingMode.off)

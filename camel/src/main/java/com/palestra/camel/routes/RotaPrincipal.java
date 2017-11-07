@@ -14,10 +14,13 @@ public class RotaPrincipal extends RouteBuilder {
             .multicast(new AggregationStrategy() {
                 @Override
                 public Exchange aggregate(Exchange exchange, Exchange exchange1) {
-                    return null;
+                	if(exchange1 != null) {
+                		
+                	}
+                    return exchange;
                 }
             }, true)
-            .to("")
+            .to("","")
             .end();
     }
 }
