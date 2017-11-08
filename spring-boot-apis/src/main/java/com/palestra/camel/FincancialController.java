@@ -3,6 +3,8 @@ package com.palestra.camel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -24,8 +26,10 @@ public class FincancialController {
 		String uri = "http://localhost:9090/orquestrador";
 		
 		//RestTemplate restTemplate = new RestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-		HttpEntity<Financial> request = new HttpEntity<Financial>(financial);
+		HttpEntity<Financial> request = new HttpEntity<Financial>(financial, headers);
 		
 		return restTemplate.postForObject(uri, request, String.class);
 		

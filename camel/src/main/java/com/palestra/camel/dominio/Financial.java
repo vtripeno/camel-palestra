@@ -3,8 +3,14 @@ package com.palestra.camel.dominio;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonFormat
+@JsonInclude(Include.NON_NULL) 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Financial implements Serializable {
 
     /**
@@ -26,7 +32,8 @@ public class Financial implements Serializable {
     }
 
     public Financial(){}
-
+    
+    @JsonGetter("id")
     public long getId() {
         return id;
     }
@@ -35,6 +42,7 @@ public class Financial implements Serializable {
         this.id = id;
     }
 
+    @JsonGetter("name")
     public String getName() {
         return name;
     }
@@ -43,6 +51,7 @@ public class Financial implements Serializable {
         this.name = name;
     }
 
+    @JsonGetter("account")
     public String getAccount() {
         return account;
     }
@@ -51,6 +60,7 @@ public class Financial implements Serializable {
         this.account = account;
     }
 
+    @JsonGetter("score")
     public Integer getScore() {
         return score;
     }

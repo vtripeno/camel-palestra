@@ -26,7 +26,7 @@ public class RotaPrincipal extends RouteBuilder {
     	
     	
         from("direct:distribuidor").autoStartup(true).id("distribuidor")
-        	.unmarshal().json(JsonLibrary.Jackson, Financial.class)
+//        	.unmarshal().json(JsonLibrary.Jackson, Financial.class)
             .log("${body}")
             .setHeader(Exchange.HTTP_METHOD, constant("GET"))
             // Fazer com Enrich
@@ -35,6 +35,8 @@ public class RotaPrincipal extends RouteBuilder {
                 @Override
                 public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
                 	if(oldExchange != null) {
+//                		Financial financial = oldExchange.getIn().getBody(Financial.class);
+//                		System.out.println(financial.getScore());
                         System.out.println("oldExchange " + oldExchange.getIn().getBody(String.class));
                 	}
                     System.out.println("newExchange " + newExchange.getIn().getBody(String.class));
