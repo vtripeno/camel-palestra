@@ -1,11 +1,12 @@
 package com.palestra.camel.routes;
 
-import com.palestra.camel.dominio.Financial;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.springframework.stereotype.Component;
+
+import com.palestra.camel.dominio.Financial;
 
 @Component
 public class RotaPrincipal extends RouteBuilder {
@@ -25,9 +26,33 @@ public class RotaPrincipal extends RouteBuilder {
     	
     	
         from("direct:distribuidor").autoStartup(true).id("distribuidor")
+        	.unmarshal().json(JsonLibrary.Jackson, Financial.class)
             .log("${body}")
             .setHeader(Exchange.HTTP_METHOD, constant("GET"))
             // Fazer com Enrich
+            .enrich("http4://localhost:9091/retornarValor/2?bridgeEndpoint=true",
+            		new AggregationStrategy() {
+                @Override
+                public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
+                	if(oldExchange != null) {
+                        System.out.println("oldExchange " + oldExchange.getIn().getBody(String.class));
+                	}
+                    System.out.println("newExchange " + newExchange.getIn().getBody(String.class));
+                    return newExchange;
+                }
+            })
+            .log("${body}")
+            .enrich("http4://localhost:9091/retornarStatus/2?bridgeEndpoint=true",
+            		new AggregationStrategy() {
+                @Override
+                public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
+                	if(oldExchange != null) {
+                        System.out.println("oldExchange " + oldExchange.getIn().getBody(String.class));
+                	}
+                    System.out.println("newExchange " + newExchange.getIn().getBody(String.class));
+                    return newExchange;
+                }
+            })
             /*.multicast(new AggregationStrategy() {
                 @Override
                 public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
@@ -41,7 +66,7 @@ public class RotaPrincipal extends RouteBuilder {
 //            .to("http4://localhost:9091/retornarValor/2?bridgeEndpoint=true",
 //                "http4://localhost:9091/retornarStatus/2?bridgeEndpoint=true")
 
-            .to("http4://localhost:9091/retornarValor/2?bridgeEndpoint=true")
+//            .to("http4://localhost:9091/retornarValor/2?bridgeEndpoint=true")
             .log("${body}")
             .end();
     }

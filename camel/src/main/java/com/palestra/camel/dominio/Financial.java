@@ -1,9 +1,10 @@
 package com.palestra.camel.dominio;
 
-import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 
-@XmlType
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat
 public class Financial implements Serializable {
 
     /**
