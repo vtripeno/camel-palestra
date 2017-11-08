@@ -5,4 +5,4 @@ Spring boot apis
 {"id": 8, "name": "ABC", "score": 1, "account": "0689"}
 
 # Address
-http://localhost:8080/consultScore
+http://localhost:9091/consultScore
