@@ -19,7 +19,7 @@ public class RotaPrincipal extends RouteBuilder {
 		);
     	
     	from("direct:error").autoStartup(true)
-    		.setBody(constant("ERROR"))
+    		//.setBody(constant("ERROR"))
 			.setHeader(Exchange.HTTP_RESPONSE_CODE, constant("500"))
     	.end();*/
     	

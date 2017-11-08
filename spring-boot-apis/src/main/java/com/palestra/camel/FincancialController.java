@@ -32,13 +32,63 @@ public class FincancialController {
 	}
 
 	@RequestMapping(value = "/retornarValor/{score}", method = RequestMethod.GET)
-	public Double retornarValor(@PathVariable String score) {
-		return 2.00;
+	public String retornarValor(@PathVariable String score) throws Exception {
+		String resultado = "";
+    	try {
+	    	Long scoreL = Long.valueOf(score);
+	    	switch(scoreL.intValue()) {
+				case 1:
+					resultado = "Entre R$ 1000,00 e R$4000,00";
+					break;
+				case 2:
+					resultado = "Entre R$ 4000,01 e R$8000,00";
+					break;
+				case 3:
+					resultado = "Entre R$ 8000,01 e R$12000,00";
+					break;
+				case 4:
+					resultado = "Entre R$ 12000,01 e R$16000,00";
+					break;
+				case 5:
+					resultado = "Entre R$ 16000,01 e R$20000,00";
+					break;
+				default:
+					throw new Exception("DEU RUIM - Score não disponível");
+			}
+    	} catch(Exception e) {
+    		throw new Exception("DEU RUIM - Score deve ser sempre numérico");
+		}
+        return resultado;
 	}
 
     @RequestMapping(value = "/retornarStatus/{score}", method = RequestMethod.GET)
-    public String retornarStatus(@PathVariable String score) {
-        return "Personalit";
+    public String retornarStatus(@PathVariable String score) throws Exception {
+    	String resultado = "";
+    	try {
+	    	Long scoreL = Long.valueOf(score);
+	    	switch(scoreL.intValue()) {
+				case 1:
+					resultado = "Basic";
+					break;
+				case 2:
+					resultado = "Advanced";
+					break;
+				case 3:
+					resultado = "Master";
+					break;
+				case 4:
+					resultado = "VIP";
+					break;
+				case 5:
+					resultado = "Personalit";
+					break;
+				default:
+					throw new Exception("DEU RUIM - Score não disponível");
+			}
+    	} catch(Exception e) {
+    		throw new Exception("DEU RUIM - Score deve ser sempre numérico");
+		}
+        return resultado;
     }
 
 
