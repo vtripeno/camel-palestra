@@ -27,6 +27,7 @@ public class RotaPrincipal extends RouteBuilder {
         from("direct:distribuidor").autoStartup(true).id("distribuidor")
             .log("${body}")
             .setHeader(Exchange.HTTP_METHOD, constant("GET"))
+            // Fazer com Enrich
             /*.multicast(new AggregationStrategy() {
                 @Override
                 public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
@@ -45,6 +46,10 @@ public class RotaPrincipal extends RouteBuilder {
             .end();
     }
 }
+
+//.unmarshal().json(JsonLibrary.Jackson, SocketPayload.class)
+//.removeHeaders("CamelHttp*") 	
+//.setHeader("CamelAcceptContentType", constant("application/json"))
 
 /*.multicast().parallelProcessing()
 .toD("direct:chamada1")
