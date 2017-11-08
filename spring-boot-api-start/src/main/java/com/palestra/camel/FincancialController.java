@@ -1,4 +1,4 @@
-package br.com.code.sorcerers.spring_boot_api_financial;
+package com.palestra.camel;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +33,13 @@ public class FincancialController {
 
 	@RequestMapping(value = "/retornarValor/{score}", method = RequestMethod.GET)
 	public Double retornarValor(@PathVariable String score) {
-	    System.out.println("CHEGOU AQUI");
 		return 2.00;
 	}
+
+    @RequestMapping(value = "/retornarStatus/{score}", method = RequestMethod.GET)
+    public String retornarStatus(@PathVariable String score) {
+        return "Personalit";
+    }
 
 
 }

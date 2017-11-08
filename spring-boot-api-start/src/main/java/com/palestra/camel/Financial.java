@@ -1,4 +1,4 @@
-package br.com.code.sorcerers.spring_boot_api_financial;
+package com.palestra.camel;
 
 import java.io.Serializable;
 

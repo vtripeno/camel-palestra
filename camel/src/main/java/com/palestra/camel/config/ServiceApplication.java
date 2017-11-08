@@ -6,9 +6,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@EnableAutoConfiguration
+@ImportResource({ "classpath:spring/camel-context.xml" })
 public class ServiceApplication {
 
     public static void main(String[] args) {

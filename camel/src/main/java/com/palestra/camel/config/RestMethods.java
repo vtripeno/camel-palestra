@@ -10,7 +10,7 @@ public class RestMethods extends RouteBuilder {
     public void configure() throws Exception {
 
         rest()
-	        .get("/orquestrador")
+	        .post("/orquestrador")
 		        .produces("application/json")
 		        .consumes("application/json")
 		        .toD("direct:distribuidor");

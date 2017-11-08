@@ -1,7 +1,9 @@
 package com.palestra.camel.routes;
 
+import com.palestra.camel.dominio.Financial;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.springframework.stereotype.Component;
 
@@ -11,28 +13,35 @@ public class RotaPrincipal extends RouteBuilder {
     @Override
     public void configure() throws Exception {
     	
-    	errorHandler(
-				deadLetterChannel("direct:error")
+    	/*errorHandler(
+				deadLetterChannel("direct:error").id("error")
 				.logExhausted(true)
 		);
     	
-    	from("direct:error")
+    	from("direct:error").autoStartup(true)
     		.setBody(constant("ERROR"))
 			.setHeader(Exchange.HTTP_RESPONSE_CODE, constant("500"))
-    	.end();
+    	.end();*/
     	
     	
-        from("direct:distribuidor")
-            .multicast(new AggregationStrategy() {
+        from("direct:distribuidor").autoStartup(true).id("distribuidor")
+            .log("${body}")
+            .setHeader(Exchange.HTTP_METHOD, constant("GET"))
+            /*.multicast(new AggregationStrategy() {
                 @Override
-                public Exchange aggregate(Exchange exchange, Exchange exchange1) {
-                	if(exchange != null) {
-                		
+                public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
+                	if(oldExchange != null) {
+                        System.out.println("oldExchange " + oldExchange.getIn().getBody(String.class));
                 	}
-                    return exchange1;
+                    System.out.println("newExchange " + newExchange.getIn().getBody(String.class));
+                    return newExchange;
                 }
-            }, true)
-            .to("","")
+            }, false)*/
+//            .to("http4://localhost:9091/retornarValor/2?bridgeEndpoint=true",
+//                "http4://localhost:9091/retornarStatus/2?bridgeEndpoint=true")
+
+            .to("http4://localhost:9091/retornarValor/2?bridgeEndpoint=true")
+            .log("${body}")
             .end();
     }
 }
