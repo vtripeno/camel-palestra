@@ -12,11 +12,11 @@ public class RestConfigutation extends RouteBuilder {
 
         restConfiguration().component("spark-rest")
             // configuracao de contexto, host e porta
-            .contextPath("/").host("localhost").port("9090")
+            .contextPath("/").host("{{host}}").port("{{porta}}")
             // configuracao de binding para efetuar automaticamente bind
             // json para pojo
             .bindingMode(RestBindingMode.off)
-            // formatar saida com pretty print
+            // formatar saida com pretty print swagger
             .dataFormatProperty("prettyPrint", "true")
             // adicao de swagger api-doc
             .apiContextPath("/api-doc/camel-palestra").apiProperty("api.title", "Camel Socket")

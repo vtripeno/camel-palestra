@@ -8,7 +8,9 @@ public class RestMethods extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-
+    	/**
+    	 * Métodos REST a serem expostos
+    	 */
         rest()
 	        .post("/orquestrador")
 		        .produces("application/json")

@@ -14,8 +14,6 @@ public class AgregacaoValor  implements AggregationStrategy {
     public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
         if (oldExchange == null) {
             return newExchange;
-        } else if(newExchange.getIn().getBody() instanceof Exception) {
-            return newExchange;
         }
         JSONObject jsonObject = oldExchange.getIn().getBody(JSONObject.class);
         jsonObject.put(chaveJson, newExchange.getIn().getBody(String.class));
