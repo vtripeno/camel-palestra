@@ -13,16 +13,16 @@ public class Financial implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private long id;
-    private String name;
-    private String account;
+    private String nome;
+    private String conta;
     private Integer score;
     
     
     
-	public Financial(long id, String name, String account, Integer score) {
+	public Financial(long id, String nome, String conta, Integer score) {
 		this.id = id;
-		this.name = name;
-		this.account = account;
+		this.nome = nome;
+		this.conta = conta;
 		this.score = score;
 	}
 	
@@ -36,20 +36,20 @@ public class Financial implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getAccount() {
-		return account;
+	public String getConta() {
+		return conta;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setConta(String conta) {
+		this.conta = conta;
 	}
 
 	public Integer getScore() {
